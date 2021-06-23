@@ -1,5 +1,5 @@
 var rps = ["rock", "paper", "scissors"],
-    scoreboard=[0,0,0],
+    scoreboard=[0,0,0], // [wins, losses, ties]
     gamecounter=0;
 
 function initializegame(){
@@ -8,18 +8,27 @@ function initializegame(){
 
     if( confirm(gamecountermessage) ){
         gamecounter++;
-        playgame();
+        alert( playgame() );
+
+        alert(`----- SCOREBOARD -----\n\n
+Wins:   ${scoreboard[0]}\n
+Losses: ${scoreboard[1]}\n
+Ties:   ${scoreboard[2]}`);
+
+        initializegame();
     }
     else{
         alert("Okay! Thanks for coming!");
         console.log("The only way to win is not to play.")
     }
+    
 }
 
 function playgame(){
 
     let userChoice,
-        validChoice = false;
+        validChoice = false,
+        resultMessage="";
     
     /** Get user input, only if valid **/
     while(!validChoice){
@@ -52,6 +61,23 @@ function playgame(){
     
     var compChoice = choicerandomizer();
     // console.log( `The computer chose ${rps[compChoice]}!` );
+
+    if(compChoice==userChoice){
+        resultMessage = `You both chose ${rps[compChoice]}!\n\nIt's a tie.`;
+        scoreboard[2]++;
+    }
+
+    else if ( (userChoice==0 && compChoice==2) || (userChoice==1 && compChoice==0) || (userChoice==2 && compChoice==1) ){
+        resultMessage = `You chose  ${rps[userChoice]}.\nThe computer chose ${rps[compChoice]}.\n\nYOU WIN!`;
+        scoreboard[0]++;
+    }
+
+    else{
+        resultMessage = `You chose  ${rps[userChoice]}.\nThe computer chose ${rps[compChoice]}.\n\nYou lose...`;
+        scoreboard[1]++;
+    }
+
+    return resultMessage;
 }
 
 function choicerandomizer(){
