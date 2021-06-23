@@ -10,7 +10,7 @@ function initializegame(){
         gamecounter++;
         alert( playgame() );
 
-        alert(`----- SCOREBOARD -----\n\n
+        alert(`----- SCOREBOARD -----\n
 Wins:   ${scoreboard[0]}\n
 Losses: ${scoreboard[1]}\n
 Ties:   ${scoreboard[2]}`);
@@ -38,29 +38,24 @@ function playgame(){
             case "r":
                 validChoice=true;
                 userChoice=0;
-                console.log("User chose rock");
                 break;
             case "paper":
             case "p":
                 validChoice=true;
                 userChoice=1;
-                console.log("User chose paper");
                 break;
             case "scissors":
             case "s":
                 validChoice=true;
                 userChoice=2;
-                console.log("User chose scissors");
                 break;
             default:
-                console.log("User is being a pain in the ass.");
                 alert("Please play by the rules.");
                 break;
         }
     }
     
     var compChoice = choicerandomizer();
-    // console.log( `The computer chose ${rps[compChoice]}!` );
 
     if(compChoice==userChoice){
         resultMessage = `You both chose ${rps[compChoice]}!\n\nIt's a tie.`;
